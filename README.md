@@ -1,74 +1,103 @@
-# Local-Event-Finder-Web-App-
+# Local Event Finder
 
+A React application for discovering events in Kenyan cities like Nairobi, Mombasa, and more. Users can search and filter events by date, category, or location.
 
-Local-Event-Finder-Web-App- is a React-based web application that allows users to explore upcoming events in Kenyan cities like Nairobi and Mombasa. Whether it’s a tech meetup, cultural festival, or music concert, users can easily filter events by date, category, or location.
+## Features
+
+- **Event Discovery**: Browse through a comprehensive list of events in different Kenyan cities
+- **Search & Filter**: Find events by keyword, category, city, or date range
+- **Event Details**: View detailed information about events, including date, venue, organizer, and ticket information
+- **Responsive Design**: Fully responsive UI that works on desktop and mobile devices
+- **Mock & Real Data**: Support for both mock data and integration with the EventBrite API
+
+## Technologies Used
+
+- React.js
+- React Router for navigation
+- Context API for state management
+- Styled Components for component styling
+- Tailwind CSS for utility classes
+- Axios for API requests
+- EventBrite API integration
+
+## Project Structure
+
+```
+src/
+├── assets/        # Images and static assets
+├── components/    # Reusable UI components
+│   ├── common/    # Common UI components (Header, Footer, etc.)
+│   └── events/    # Event-specific components
+├── contexts/      # React context providers
+├── data/          # Mock data and constants
+├── hooks/         # Custom React hooks
+├── pages/         # Page components
+├── services/      # API services
+└── utils/         # Utility functions
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+   ```
+   git clone https://github.com/yourusername/local-event-finder.git
+   cd local-event-finder
+   ```
+
+2. Install dependencies
+   ```
+   npm install
+   ```
+
+3. Configure environment variables
+   - Copy `.env.example` to `.env`
+   - Add your EventBrite API key if you want to use the real API
+   ```
+   cp .env.example .env
+   ```
+
+4. Start the development server
+   ```
+   npm start
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) to view the app in your browser
+
+## API Configuration
+
+By default, the application uses mock data. To connect to the EventBrite API:
+
+1. Get an API key from [EventBrite Developer](https://www.eventbrite.com/platform/api)
+2. Update the `.env` file with your API key
+3. Set `REACT_APP_USE_MOCK_DATA=false` in the `.env` file
+
+## Available Scripts
+
+- `npm start` - Runs the app in development mode
+- `npm test` - Launches the test runner
+- `npm run build` - Builds the app for production
+- `npm run eject` - Ejects from Create React App (one-way operation)
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License
 
 ---
 
-## 🚀 Features
-
-- 🔍 **Search & Filter** events by:
-  - City (Nairobi, Mombasa, etc.)
-  - Date
-  - Category (Tech, Culture, Music, etc.)
-- 📅 View detailed event information
-- 🌍 Responsive design for mobile and desktop
-- ⚡ Fast performance powered by Vite + React
-- ☁️ Easy deployment with Netlify or Vercel
-
----
-
-## 🧑‍💻 Tech Stack
-
-- **Frontend**: React, React Router, Vite
-- **Styling**: Tailwind CSS / CSS Modules
-- **State Management**: Context API / Zustand
-- **Animation (Optional)**: Framer Motion
-- **Deployment**: Netlify / Vercel
-
----
-
-## 🏗️ Project Structure
-
-kenya-events/ ├── public/ ├── src/ │ ├── assets/ │ ├── components/ │ ├── context/ │ ├── data/ │ ├── pages/ │ ├── styles/ │ ├── utils/ │ ├── App.jsx │ └── main.jsx ├── .gitignore ├── index.html ├── package.json ├── README.md └── tailwind.config.js
-
-yaml
-Copy
-Edit
-
----
-
-## 🧪 Installation & Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/kenya-events.git
-   cd kenya-events
-Install dependencies
-
-bash
-Copy
-Edit
-npm install
-Run the development server
-
-bash
-Copy
-Edit
-npm run dev
-Build for production
-
-bash
-Copy
-Edit
-npm run build
-🧑‍🤝‍🧑 Team Members
-
-Name	GitHub Username	Role
-[Your Name]	@your-username	Group Leader / Coordinator
-Member 1	@member1	UI & Routing
-Member 2	@member2	Event Listing & Filters
-Member 3	@member3	Event Details Page
-Member 4	@member4	State & Search Management
-Member 5	@member5	Styling & Deployment
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

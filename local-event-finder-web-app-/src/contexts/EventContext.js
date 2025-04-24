@@ -73,4 +73,75 @@ export const EventProvider = ({ children }) => {
     
     loadInitialData();
   }, []);
+
+  // Update events when filters change
+  useEffect(() => {
+    // Add a debounce to prevent multiple rapid fetches
+    const debounceTimer = setTimeout(async () => {
+      setLoading(true);
+      
+      try {
+        // Get events with filters (if any)
+        const eventsData = await eventService.getEvents(filters);
+        setEvents(eventsData.events || []);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching filtered events:', err);
+        setError('Failed to load events with the selected filters.');
+      } finally {
+        setLoading(false);
+      }
+    }, 300); // 300ms debounce
+    
+    // Cleanup the timer on dependency changes
+    return () => clearTimeout(debounceTimer);
+  }, [filters]); // Remove loading dependency to prevent flicker
   
+  // Function to update filters
+  const updateFilters = (newFilters) => {
+    setFilters(prev => ({ ...prev, ...newFilters }));
+  };
+  
+  // Function to reset filters
+  const resetFilters = () => {
+    setFilters({
+      city: '',
+      category: ''
+    });
+  };
+  
+  // Function to get a single event by ID
+  const getEventById = async (eventId) => {
+    try {
+      setLoading(true);
+      const eventData = await eventService.getEventById(eventId);
+      setLoading(false);
+      return eventData;
+    } catch (err) {
+      setLoading(false);
+      setError(`Failed to load event with ID ${eventId}`);
+      throw err;
+    }
+  };
+  
+  // Context value
+  const value = {
+    events,
+    categories,
+    cities,
+    loading,
+    error,
+    filters,
+    updateFilters,
+    resetFilters,
+    getEventById
+  };
+  
+  return (
+    <EventContext.Provider value={value}>
+      {children}
+    </EventContext.Provider>
+  );
+};
+
+export default EventContext;

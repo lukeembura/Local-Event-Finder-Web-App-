@@ -123,4 +123,100 @@ const eventService = {
           }
         }
       }
-      
+    } catch (error) {
+        console.error('Unexpected error in eventService.getEvents:', error);
+        // Final fallback to mock data
+        return {
+          pagination: {
+            page_count: 1,
+            page_size: mockEvents.length,
+            page_number: 1,
+            has_more_items: false
+          },
+          events: mockEvents
+        };
+      }
+    },
+    
+    // Get specific event by ID
+    getEventById: async (eventId) => {
+      try {
+        if (USE_MOCK_DATA) {
+          console.log('Using mock data for event details');
+          const event = mockEvents.find(event => event.id === eventId);
+          
+          if (!event) {
+            throw new Error(`Event with ID ${eventId} not found`);
+          }
+          
+          return event;
+        } else {
+          try {
+            // Try to get real event data
+            const eventData = await apiEventService.getEventById(eventId);
+            return eventData;
+          } catch (apiError) {
+            console.log('API error fetching event details, checking mock data as fallback', apiError);
+            
+            // If API fails and this looks like our mock/synthetic event ID, use that
+            if (eventId.startsWith('public-')) {
+              // This will be handled by our API service directly
+              throw apiError;
+            }
+            
+            // Otherwise check if it's one of our mock events
+            const mockEvent = mockEvents.find(event => event.id === eventId);
+            if (mockEvent) {
+              return mockEvent;
+            }
+            
+            // If we get here, we couldn't find the event
+            throw apiError;
+          }
+        }
+      } catch (error) {
+        console.error(`Error in eventService.getEventById for ID ${eventId}:`, error);
+        throw error;
+      }
+    },
+    
+    // Get all categories
+    getCategories: async () => {
+      try {
+        // Always try to get real categories from Eventbrite first as this endpoint works
+        const categoriesData = await apiEventService.getCategories();
+        
+        // Map Eventbrite categories to our app's format
+        const formattedCategories = categoriesData.categories.map(category => ({
+          id: category.id,
+          name: category.name
+        }));
+        
+        return {
+          categories: formattedCategories
+        };
+      } catch (error) {
+        console.log('Failed to get categories from API, using mock data', error);
+        
+        // Fall back to mock data if API fails
+        return {
+          categories: mockCategories
+        };
+      }
+    },
+    
+    // Get cities (only mock data for now, as EventBrite might not have this endpoint)
+    getCities: async () => {
+      if (USE_MOCK_DATA) {
+        console.log('Using mock data for cities');
+        return mockCities;
+      } else {
+        // For real API, you would need to implement location fetching
+        // This might be a separate endpoint or may require additional processing
+        console.log('Using mock cities data (API does not provide this directly)');
+        return mockCities;
+      }
+    }
+  };
+  
+  export default eventService;

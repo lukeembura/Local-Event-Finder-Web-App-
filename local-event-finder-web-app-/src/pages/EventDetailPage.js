@@ -247,3 +247,139 @@ const EventDetailPage = () => {
       </DetailContainer>
     );
   }
+     
+  return (
+    <DetailContainer className="max-w-6xl mx-auto px-4 py-8">
+      <Breadcrumbs className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+        <BreadcrumbLink to="/" className="text-primary hover:underline">Home</BreadcrumbLink>
+        <span>/</span>
+        <BreadcrumbLink to="/events" className="text-primary hover:underline">Events</BreadcrumbLink>
+        <span>/</span>
+        <span>{event.name.text}</span>
+      </Breadcrumbs>
+      
+      <EventHeader>
+        <Category className="inline-block bg-accent text-primary text-sm font-medium px-3 py-1 rounded-full mb-4">
+          {event.category}
+        </Category>
+        <EventTitle className="text-4xl font-bold text-primary mb-4">
+          {event.name.text}
+        </EventTitle>
+        
+        <EventMeta className="flex flex-wrap gap-6 mb-6 text-gray-500">
+          <MetaItem className="flex items-center gap-2">
+            <span role="img" aria-label="calendar">📅</span> {formatDate(event.start.local)}
+          </MetaItem>
+          <MetaItem className="flex items-center gap-2">
+            <span role="img" aria-label="location">📍</span> {event.venue.name}, {event.venue.address.city}
+          </MetaItem>
+          <MetaItem className="flex items-center gap-2">
+            <span role="img" aria-label="organizer">👥</span> Organized by {event.organizer.name}
+          </MetaItem>
+        </EventMeta>
+      </EventHeader>
+      
+      <EventContent className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <MainContent className="lg:col-span-2">
+          <ImageWrapper className="rounded-lg overflow-hidden mb-8">
+            <EventImage 
+              src={event.logo?.url || 'https://placehold.co/800x400/png?text=No+Image'} 
+              alt={event.name.text}
+              className="w-full h-auto object-cover"
+            />
+          </ImageWrapper>
+          
+          <CardTitle className="text-xl font-semibold text-primary mb-4">Event Description</CardTitle>
+          <Description className="text-gray-700 leading-relaxed">
+            <p>{event.description.text}</p>
+          </Description>
+        </MainContent>
+        
+        <Sidebar>
+          <Card className="bg-white rounded-lg shadow-md p-6 mb-6">
+            <CardTitle className="text-xl font-semibold text-primary mb-4">Event Details</CardTitle>
+            <InfoList>
+              <InfoItem className="flex mb-4">
+                <InfoIcon className="mr-3 text-primary">📅</InfoIcon>
+                <InfoContent>
+                  <InfoLabel className="text-sm text-gray-500 mb-1">Date and Time</InfoLabel>
+                  <InfoValue className="text-gray-800 font-medium">{formatDate(event.start.local)}</InfoValue>
+                  {event.end && (
+                    <InfoValue className="text-gray-800 font-medium">
+                      to {formatDate(event.end.local)}
+                    </InfoValue>
+                  )}
+                </InfoContent>
+              </InfoItem>
+              
+              <InfoItem className="flex mb-4">
+                <InfoIcon className="mr-3 text-primary">📍</InfoIcon>
+                <InfoContent>
+                  <InfoLabel className="text-sm text-gray-500 mb-1">Location</InfoLabel>
+                  <InfoValue className="text-gray-800 font-medium">{event.venue.name}</InfoValue>
+                  <InfoValue className="text-gray-800">
+                    {event.venue.address.address_1}, {event.venue.address.city}, Kenya
+                  </InfoValue>
+                </InfoContent>
+              </InfoItem>
+              
+              <InfoItem className="flex mb-4">
+                <InfoIcon className="mr-3 text-primary">👥</InfoIcon>
+                <InfoContent>
+                  <InfoLabel className="text-sm text-gray-500 mb-1">Organizer</InfoLabel>
+                  <InfoValue className="text-gray-800 font-medium">{event.organizer.name}</InfoValue>
+                </InfoContent>
+              </InfoItem>
+              
+              <InfoItem className="flex">
+                <InfoIcon className="mr-3 text-primary">🎟️</InfoIcon>
+                <InfoContent>
+                  <InfoLabel className="text-sm text-gray-500 mb-1">Capacity</InfoLabel>
+                  <InfoValue className="text-gray-800 font-medium">{event.capacity} attendees</InfoValue>
+                </InfoContent>
+              </InfoItem>
+            </InfoList>
+            
+            <TicketInfo className="mt-6 pt-6 border-t border-gray-200">
+              <Price className="text-2xl font-bold text-secondary mb-4">
+                {event.is_free ? 'Free' : event.ticket_price}
+              </Price>
+              <TicketButton 
+                href={event.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block w-full bg-secondary text-white font-semibold text-center py-3 px-4 rounded-md hover:bg-secondary-dark transition-colors"
+              >
+                {event.is_free ? 'Register' : 'Get Tickets'}
+              </TicketButton>
+            </TicketInfo>
+          </Card>
+          
+          <Card className="bg-white rounded-lg shadow-md p-6">
+            <CardTitle className="text-xl font-semibold text-primary mb-4">Share Event</CardTitle>
+            <div className="flex gap-4">
+              <button className="text-primary hover:text-primary-dark text-2xl" title="Share on Facebook">
+                📱
+              </button>
+              <button className="text-primary hover:text-primary-dark text-2xl" title="Share on Twitter">
+                📱
+              </button>
+              <button className="text-primary hover:text-primary-dark text-2xl" title="Share on WhatsApp">
+                📱
+              </button>
+              <button className="text-primary hover:text-primary-dark text-2xl" title="Share via Email">
+                📧
+              </button>
+            </div>
+          </Card>
+        </Sidebar>
+      </EventContent>
+      
+      <BackButton to="/events" className="inline-flex items-center text-primary font-medium hover:underline mt-8">
+        ← Back to Events
+      </BackButton>
+    </DetailContainer>
+  );
+};
+
+export default EventDetailPage;

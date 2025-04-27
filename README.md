@@ -1,6 +1,6 @@
 # Local Event Finder
 
-A React application for discovering events in Kenyan cities like Nairobi, Mombasa, and more. Users can search and filter events by date, category, or location.
+A React application for discovering events in Kenyan cities like Nairobi, Mombasa, and more.
 
 ## Features
 

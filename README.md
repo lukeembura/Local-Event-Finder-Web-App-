@@ -5,7 +5,7 @@ A React application for discovering events in Kenyan cities like Nairobi, Mombas
 ## Features
 
 - **Event Discovery**: Browse through a comprehensive list of events in different Kenyan cities
-- **Search **: Find events by keyword, category, city, or date range
+- Search: Find events by keyword, category, city, or date range
 - **Event Details**: View detailed information about events, including date, venue, organizer, and ticket information
 - **Responsive Design**: Fully responsive UI that works on desktop and mobile devices
 - **Mock & Real Data**: Support for both mock data and integration with the EventBrite API

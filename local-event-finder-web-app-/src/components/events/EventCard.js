@@ -400,3 +400,5 @@ const EventCard = ({ event, featured = false }) => {
     </Card>
   );
 };
+
+export default EventCard;

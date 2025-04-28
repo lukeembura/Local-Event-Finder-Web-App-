@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { useEvents } from '../contexts/EventContext';
 import Loading from '../components/common/Loading';
-import ErrorMessage from '../components/common/ErrorMessage';
 import EventCard from '../components/events/EventCard';
+import ErrorMessage from '../components/ErrorMessage';
 
 const fadeInUp = keyframes`
   from {

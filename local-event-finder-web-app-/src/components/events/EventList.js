@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import EventCard from './EventCard';
 import Loading from '../common/Loading';
-import ErrorMessage from '../common/ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 import { useEvents } from '../../contexts/EventContext';
 
 const EventsGrid = styled.div`

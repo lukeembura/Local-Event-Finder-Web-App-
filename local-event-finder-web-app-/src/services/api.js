@@ -75,6 +75,7 @@ export const eventService = {
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
           params: { _limit: 10 } // Limit to 10 posts
         });
+console.log(response.data); // Example usage
         
         // Transform the API data into our expected events format
         const events = response.data.map((post, index) => ({
@@ -220,9 +221,8 @@ export const eventService = {
           const postId = eventId.replace('public-', '');
           try {
             // Fetch the specific post
-            const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`);
-            const postData = response.data;
-            
+            //const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+                        
             // Transform it to look like an event
             const index = parseInt(postId); // Use post ID for deterministic event properties
             return {

@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useEvents } from '../contexts/EventContext';
 import Loading from '../components/common/Loading';
-import ErrorMessage from '../components/common/ErrorMessage';
+import ErrorMessage from '../components/ErrorMessage';
 
 const DetailContainer = styled.div`
   max-width: 1200px;
